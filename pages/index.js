@@ -4,10 +4,11 @@ import { CourseList } from "@components/ui/course";
 import { getAllCourses } from "content/courses/fetcher";
 
 export default function Home({ courses }) {
-  const { test } = useWeb3();
+  const { web3, isInitialized } = useWeb3();
+  console.log(web3);
   return (
     <>
-      {test}
+      {isInitialized ? "INIT" : "NOT_INIT"}
       <Hero />
       <CourseList courses={courses} />
     </>
