@@ -1,4 +1,3 @@
-import { useWeb3 } from "@components/providers";
 import { Hero } from "@components/ui/common";
 import { CourseList } from "@components/ui/course";
 import { getAllCourses } from "content/courses/fetcher";
