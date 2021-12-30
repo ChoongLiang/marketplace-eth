@@ -1,11 +1,10 @@
-import { Modal } from "@components/common";
-import { Curriculum, Hero, Keypoints } from "@components/course";
-import { BaseLayout } from "@components/layout";
+import { Modal } from "@components/ui/common";
+import { Curriculum, Hero, Keypoints } from "@components/ui/course";
 import { getAllCourses } from "@content/courses/fetcher";
 
 export default function Course({ course }) {
   return (
-    <BaseLayout>
+    <>
       <div className="py-4">
         <Hero
           title={course.title}
@@ -16,7 +15,7 @@ export default function Course({ course }) {
       <Keypoints points={course.wsl} />
       <Curriculum locked={true} />
       <Modal />
-    </BaseLayout>
+    </>
   );
 }
 
