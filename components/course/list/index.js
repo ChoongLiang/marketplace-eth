@@ -1,4 +1,5 @@
-export default function CourseList() {
+export default function CourseList({ courses }) {
+  console.log(courses);
   return (
     <section className="grid grid-cols-2 gap-4 mb-5">
       {Array.from({ length: 4 }).map((_, i) => (
