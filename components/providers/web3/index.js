@@ -1,5 +1,11 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-const { createContext, useContext, useEffect, useState } = require("react");
+const {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} = require("react");
 const Web3 = require("web3");
 
 // Initialize a context variable
@@ -11,8 +17,10 @@ export default function Web3Provider({ children }) {
     web3: null,
     provider: null,
     contract: null,
-    isInitialized: false,
+    isLoading: true,
   });
+
+  const [accounts, setAccounts] = useState(null);
 
   useEffect(() => {
     const getProvider = async () => {
@@ -23,18 +31,42 @@ export default function Web3Provider({ children }) {
           web3: web3,
           provider: provider,
           contract: null,
-          isInitialized: true,
+          isLoading: false,
         });
       } else {
-        setWeb3Api((api) => ({ ...api, isInitialized: true }));
+        setWeb3Api((api) => ({ ...api, isLoading: false }));
         console.error("Please install Metamask!");
       }
     };
     getProvider();
   }, []);
+
+  // useMemo can invokes the provided function and caches the result
+  // only update if the item changes, avoiding expensive render
+  const _web3Api = useMemo(
+    () => ({
+      ...web3Api,
+      connect: web3Api.provider
+        ? async () => {
+            try {
+              const accounts = await web3Api.provider.request({
+                method: "eth_requestAccounts",
+              });
+              setAccounts(accounts);
+            } catch {
+              location.reload();
+            }
+          }
+        : console.error(
+            "Cannot connect to wallet, please try refreshing your browser!"
+          ),
+    }),
+    [web3Api]
+  );
+
   return (
     // creatContext with null but it is already a context. So you can access Provider.
-    <Web3Context.Provider value={web3Api}>{children}</Web3Context.Provider>
+    <Web3Context.Provider value={_web3Api}>{children}</Web3Context.Provider>
   );
 }
 
