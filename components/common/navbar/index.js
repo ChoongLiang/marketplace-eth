@@ -23,7 +23,6 @@ export default function Navbar() {
                   Features
                 </a>
               </Link>
-
               <Link href="/">
                 <a
                   href="#"
