@@ -7,7 +7,11 @@ export default function Course({ course }) {
   return (
     <BaseLayout>
       <div className="py-4">
-        <Hero />
+        <Hero
+          title={course.title}
+          description={course.description}
+          coverImage={course.coverImage}
+        />
       </div>
       <Keypoints />
       <Curriculum />
