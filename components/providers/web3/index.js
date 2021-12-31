@@ -1,4 +1,5 @@
 import detectEthereumProvider from "@metamask/detect-provider";
+import { setupHooks } from "./hooks/setupHooks";
 const {
   createContext,
   useContext,
@@ -19,8 +20,6 @@ export default function Web3Provider({ children }) {
     contract: null,
     isLoading: true,
   });
-
-  const [accounts, setAccounts] = useState(null);
 
   useEffect(() => {
     const getProvider = async () => {
@@ -47,13 +46,13 @@ export default function Web3Provider({ children }) {
     () => ({
       ...web3Api,
       isWeb3Loaded: web3Api.web3,
+      hooks: setupHooks(web3Api.web3),
       connect: web3Api.provider
         ? async () => {
             try {
-              const accounts = await web3Api.provider.request({
+              await web3Api.provider.request({
                 method: "eth_requestAccounts",
               });
-              setAccounts(accounts);
             } catch {
               location.reload();
             }

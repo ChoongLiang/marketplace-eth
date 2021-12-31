@@ -3,9 +3,11 @@ import Link from "next/link";
 import { Button } from "@components/ui/common";
 
 export default function Navbar() {
-  const { isWeb3Loaded, isLoading, connect } = useWeb3();
+  const { isWeb3Loaded, isLoading, connect, hooks } = useWeb3();
+  const { account } = hooks.useAccount();
   return (
     <section>
+      {account}
       <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
         <nav className="relative" aria-label="Global">
           <div className="flex justify-between items-center">
