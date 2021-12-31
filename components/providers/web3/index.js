@@ -25,10 +25,10 @@ export default function Web3Provider({ children }) {
     const getProvider = async () => {
       const provider = await detectEthereumProvider();
       if (provider) {
-        const web3 = new Web3();
+        const web3 = new Web3(provider);
         setWeb3Api({
-          web3: web3,
-          provider: provider,
+          web3,
+          provider,
           contract: null,
           isLoading: false,
         });
@@ -54,13 +54,15 @@ export default function Web3Provider({ children }) {
               await provider.request({
                 method: "eth_requestAccounts",
               });
-            } catch {
+            } catch (error) {
+              console.error(error);
               location.reload();
             }
           }
-        : console.error(
-            "Cannot connect to wallet, please try refreshing your browser!"
-          ),
+        : () =>
+            console.error(
+              "Cannot connect to wallet, please try refreshing your browser!"
+            ),
     };
   }, [web3Api]);
 

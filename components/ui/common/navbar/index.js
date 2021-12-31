@@ -48,9 +48,7 @@ export default function Navbar() {
                 </a>
               </Link>
               {isLoading ? (
-                <Button onClick={connect} disabled={true}>
-                  Loading
-                </Button>
+                <Button disabled={true}>Loading</Button>
               ) : isWeb3Loaded ? (
                 <Button onClick={connect}>Connect</Button>
               ) : (
