@@ -1,11 +1,9 @@
 import { useWeb3 } from "@components/providers";
 import Link from "next/link";
 import { Button } from "@components/ui/common";
-import { useRouter } from "next/router";
 
 export default function Navbar() {
   const { isWeb3Loaded, isLoading, connect } = useWeb3();
-  const router = useRouter();
   return (
     <section>
       <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
@@ -55,7 +53,7 @@ export default function Navbar() {
               ) : (
                 <Button
                   onClick={() => {
-                    router.push("https://metamask.io/");
+                    window.open("https://metamask.io/", "_blank");
                   }}
                 >
                   Install Metamask
