@@ -42,15 +42,16 @@ export default function Web3Provider({ children }) {
 
   // useMemo can invokes the provided function and caches the result
   // only update if the item changes, avoiding expensive render
-  const _web3Api = useMemo(
-    () => ({
+  const _web3Api = useMemo(() => {
+    const { web3, provider } = web3Api;
+    return {
       ...web3Api,
-      isWeb3Loaded: web3Api.web3,
-      hooks: setupHooks(web3Api.web3),
-      connect: web3Api.provider
+      isWeb3Loaded: web3 != null,
+      hooks: setupHooks(web3),
+      connect: provider
         ? async () => {
             try {
-              await web3Api.provider.request({
+              await provider.request({
                 method: "eth_requestAccounts",
               });
             } catch {
@@ -60,9 +61,8 @@ export default function Web3Provider({ children }) {
         : console.error(
             "Cannot connect to wallet, please try refreshing your browser!"
           ),
-    }),
-    [web3Api]
-  );
+    };
+  }, [web3Api]);
 
   return (
     // creatContext with null but it is already a context. So you can access Provider.
