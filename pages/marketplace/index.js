@@ -9,8 +9,7 @@ export default function Marketplace({ courses }) {
   const { network } = useNetwork();
   return (
     <>
-      {network}
-      <WalletBar account={account.data} />
+      <WalletBar account={account.data} network={network.data} />
       <CourseList courses={courses} />
     </>
   );
