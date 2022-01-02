@@ -49,7 +49,7 @@ export default function Navbar() {
               {isLoading ? (
                 <Button disabled={true}>Loading</Button>
               ) : isWeb3Loaded ? (
-                account ? (
+                account.data ? (
                   <Button hoverable={false} className="cursor-default">
                     Hi There
                   </Button>
@@ -69,9 +69,9 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
-      {account && (
+      {account.data && (
         <div className="flex justify-end pt-1 sm:px-6 lg:px-8">
-          <div className="overline uppercase font-light ">{account}</div>
+          <div className="overline uppercase font-light ">{account.data}</div>
         </div>
       )}
     </section>
