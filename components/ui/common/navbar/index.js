@@ -19,7 +19,7 @@ export default function Navbar() {
                   href="#"
                   className="font-medium mr-8 text-gray-500 hover:text-gray-900"
                 >
-                  Product
+                  Home
                 </a>
               </Link>
               <Link href="/">

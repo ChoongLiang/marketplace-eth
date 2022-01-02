@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CourseList({ courses }) {
+export default function CourseList({ courses, Footer = null }) {
   return (
     <section className="grid md:grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
       {courses.map((course) => (
@@ -32,8 +32,8 @@ export default function CourseList({ courses }) {
                   {course.title}
                 </a>
               </Link>
-
               <p className="mt-2 text-gray-500">{course.description}</p>
+              {Footer && <Footer />}
             </div>
           </div>
         </div>

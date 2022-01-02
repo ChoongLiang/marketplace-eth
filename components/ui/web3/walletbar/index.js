@@ -1,6 +1,6 @@
 export default function WalletBar({ account, network }) {
   return (
-    <section className="text-white bg-indigo-600">
+    <section className="text-white bg-indigo-600 rounded-lg">
       <div className="p-8">
         <h1 className="text-2xl">Hello, {account}</h1>
         <h2 className="subtitle mb-5 text-xl">
