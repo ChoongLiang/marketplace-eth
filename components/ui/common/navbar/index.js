@@ -50,15 +50,11 @@ export default function Navbar() {
               </Link>
               {isLoading ? (
                 <Button disabled={true}>Loading</Button>
+              ) : account.data ? (
+                <Button hoverable={false} className="cursor-default">
+                  Hi There {account.isAdmin && "Admin"}
+                </Button>
               ) : requireInstall ? (
-                account.data ? (
-                  <Button hoverable={false} className="cursor-default">
-                    Hi There {account.isAdmin && "Admin"}
-                  </Button>
-                ) : (
-                  <Button onClick={connect}>Connect</Button>
-                )
-              ) : (
                 <Button
                   onClick={() => {
                     window.open("https://metamask.io/", "_blank");
@@ -66,6 +62,8 @@ export default function Navbar() {
                 >
                   Install Metamask
                 </Button>
+              ) : (
+                <Button onClick={connect}>Connect</Button>
               )}
             </div>
           </div>
