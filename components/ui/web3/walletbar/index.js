@@ -18,10 +18,20 @@ export default function WalletBar({ account, network }) {
             </div>
           </div>
           <div>
-            <div>
-              <span>Currently on </span>
-              <strong className="text-2xl">{network}</strong>
-            </div>
+            {!network.isSupported && (
+              <div className="bg-red-500 p-3 rounded-lg">
+                <div>
+                  Please connect to:{" "}
+                  <strong className="text-2xl">{network.targetNetwork}</strong>
+                </div>
+              </div>
+            )}
+            {network.data && (
+              <div>
+                <span>Currently on </span>
+                <strong className="text-2xl">{network.data}</strong>
+              </div>
+            )}
           </div>
         </div>
       </div>

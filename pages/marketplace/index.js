@@ -10,7 +10,14 @@ export default function Marketplace({ courses }) {
   const { network } = useNetwork();
   return (
     <>
-      <WalletBar account={account.data} network={network.data} />
+      <WalletBar
+        account={account.data}
+        network={{
+          data: network.data,
+          targetNetwork: network.targetNetwork,
+          isSupported: network.isSupported,
+        }}
+      />
       <CourseList
         courses={courses}
         Footer={() => (
