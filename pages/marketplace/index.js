@@ -16,6 +16,7 @@ export default function Marketplace({ courses }) {
           data: network.data,
           targetNetwork: network.targetNetwork,
           isSupported: network.isSupported,
+          initialized: network.initialized,
         }}
       />
       <CourseList

@@ -1,4 +1,5 @@
 export default function WalletBar({ account, network }) {
+  const { data, isSupported, initialized, targetNetwork } = network;
   return (
     <section className="text-white bg-indigo-600 rounded-lg">
       <div className="p-8">
@@ -18,18 +19,18 @@ export default function WalletBar({ account, network }) {
             </div>
           </div>
           <div>
-            {!network.isSupported && (
+            {!initialized && !isSupported && (
               <div className="bg-red-500 p-3 rounded-lg">
                 <div>
                   Please connect to:{" "}
-                  <strong className="text-2xl">{network.targetNetwork}</strong>
+                  <strong className="text-2xl">{targetNetwork}</strong>
                 </div>
               </div>
             )}
-            {network.data && (
+            {data && (
               <div>
                 <span>Currently on </span>
-                <strong className="text-2xl">{network.data}</strong>
+                <strong className="text-2xl">{data}</strong>
               </div>
             )}
           </div>
