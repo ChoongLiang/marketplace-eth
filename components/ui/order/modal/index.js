@@ -37,7 +37,7 @@ export default function OrderModal({ course, onClose }) {
       <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div className="sm:flex sm:items-start">
-            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
               <h3
                 className="mb-7 text-lg font-bold leading-6 text-gray-900"
                 id="modal-title"
@@ -95,6 +95,12 @@ export default function OrderModal({ course, onClose }) {
                   id="email"
                   className="w-80 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="email"
+                  onChange={({ target: { value } }) => {
+                    setOrder({
+                      ...order,
+                      email: value,
+                    });
+                  }}
                 />
                 <p className="text-xs text-gray-700 mt-1">
                   It&apos;s important to fill a correct email, otherwise the
@@ -112,6 +118,12 @@ export default function OrderModal({ course, onClose }) {
                   id="confirmationEmail"
                   className="w-80 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md"
                   placeholder="confirm email"
+                  onChange={({ target: { value } }) => {
+                    setOrder({
+                      ...order,
+                      confirmationEmail: value,
+                    });
+                  }}
                 />
               </div>
               <div className="text-xs text-gray-700 flex">
@@ -128,7 +140,13 @@ export default function OrderModal({ course, onClose }) {
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex">
-          <Button>Submit</Button>
+          <Button
+            onClick={() => {
+              alert(JSON.stringify(order));
+            }}
+          >
+            Submit
+          </Button>
           <Button variant="red" onClick={closeModal}>
             Cancel
           </Button>
