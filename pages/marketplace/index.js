@@ -37,6 +37,7 @@ export default function Marketplace({ courses }) {
         <OrderModal
           course={selectedCourse}
           onClose={() => setSelectedCourse(null)}
+          onSubmit={(order) => alert(JSON.stringify(order))}
         />
       )}
     </>
