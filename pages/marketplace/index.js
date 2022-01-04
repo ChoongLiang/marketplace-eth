@@ -22,7 +22,22 @@ export default function Marketplace({ courses }) {
         }}
       />
       <CourseList courses={courses}>
-        {(course) => <CourseCard key={course.id} course={course} />}
+        {(course) => (
+          <CourseCard
+            key={course.id}
+            course={course}
+            Footer={() => (
+              <div className="mt-4">
+                <Button
+                  variant="lightPurple"
+                  onClick={() => setSelectedCourse(course)}
+                >
+                  Purchase
+                </Button>
+              </div>
+            )}
+          />
+        )}
       </CourseList>
     </>
   );

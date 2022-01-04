@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Card({ course }) {
+export default function Card({ course, Footer = null }) {
   return (
     <div
       key={course.id}
@@ -33,7 +33,7 @@ export default function Card({ course }) {
           <p className="mt-2 text-gray-500">
             {course.description.substring(0, 69)} ...
           </p>
-          {/* {Footer && <Footer />} */}
+          {Footer && <Footer />}
         </div>
       </div>
     </div>
