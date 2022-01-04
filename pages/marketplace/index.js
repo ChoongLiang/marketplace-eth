@@ -1,11 +1,13 @@
-import { CourseList } from "@components/ui/course";
+import { CourseCard, CourseList } from "@components/ui/course";
 import { getAllCourses } from "content/courses/fetcher";
 import { WalletBar } from "@components/ui/web3";
 import { useAccount, useNetwork } from "@components/hooks/web3";
 import { Button } from "@components/ui/common";
 import OrderModal from "@components/ui/order/modal";
+import { useState } from "react";
 
 export default function Marketplace({ courses }) {
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const { account } = useAccount();
   const { network } = useNetwork();
   return (
@@ -19,15 +21,9 @@ export default function Marketplace({ courses }) {
           networkDataInitialized: network.networkDataInitialized,
         }}
       />
-      <CourseList
-        courses={courses}
-        Footer={() => (
-          <div className="mt-4">
-            <Button variant="lightPurple">Purchase</Button>
-          </div>
-        )}
-      />
-      <OrderModal />
+      <CourseList courses={courses}>
+        {(course) => <CourseCard key={course.id} course={course} />}
+      </CourseList>
     </>
   );
 }
