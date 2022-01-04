@@ -1,8 +1,8 @@
 import { CourseCard, CourseList } from "@components/ui/course";
 import { getAllCourses } from "content/courses/fetcher";
 import { EthRates, WalletBar } from "@components/ui/web3";
-import { useAccount, useNetwork, useWalletInfo } from "@components/hooks/web3";
-import { Button } from "@components/ui/common";
+import { useWalletInfo } from "@components/hooks/web3";
+import { Breadcrumbs, Button } from "@components/ui/common";
 import OrderModal from "@components/ui/order/modal";
 import { useState } from "react";
 import { useEthPrice } from "@components/hooks/web3/useEthPrice";
@@ -24,6 +24,9 @@ export default function Marketplace({ courses }) {
         }}
       />
       <EthRates ethPrice={eth.data} perItem={eth.perItem} />
+      <div className="flex flex-row-reverse">
+        <Breadcrumbs />
+      </div>
       <CourseList courses={courses}>
         {(course) => (
           <CourseCard
