@@ -23,7 +23,7 @@ export default function Marketplace({ courses }) {
           networkDataInitialized: network.networkDataInitialized,
         }}
       />
-      <EthRates eth={eth.data} />
+      <EthRates ethPrice={eth.data} perItem={eth.perItem} />
       <CourseList courses={courses}>
         {(course) => (
           <CourseCard
