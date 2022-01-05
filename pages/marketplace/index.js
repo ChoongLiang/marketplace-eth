@@ -1,6 +1,6 @@
 import { CourseCard, CourseList } from "@components/ui/course";
 import { getAllCourses } from "content/courses/fetcher";
-import { useOwnedCoursesHook, useWalletInfo } from "@components/hooks/web3";
+import { useWalletInfo } from "@components/hooks/web3";
 import { Button } from "@components/ui/common";
 import OrderModal from "@components/ui/order/modal";
 import { useState } from "react";
@@ -11,7 +11,6 @@ export default function Marketplace({ courses }) {
   const { web3, contract } = useWeb3();
   const { canPurchase, account } = useWalletInfo();
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const { ownedCourses } = useOwnedCoursesHook();
 
   const handlePurchaseCourse = async (order) => {
     // First course id: 1410474 => 31 34 31 30 34 37 34
@@ -56,7 +55,6 @@ export default function Marketplace({ courses }) {
   return (
     <>
       <MarketHeader />
-      {ownedCourses.data}
       <CourseList courses={courses}>
         {(course) => (
           <CourseCard
