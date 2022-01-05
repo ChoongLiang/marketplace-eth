@@ -2,11 +2,11 @@ import { MarketHeader } from "@components/ui/marketplace";
 import { OwnedCourseCard } from "@components/ui/course";
 import { Button, Message } from "@components/ui/common";
 import { getAllCourses } from "content/courses/fetcher";
-import { useAccount, useOwnedCoursesHook } from "@components/hooks/web3";
+import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 
 export default function OwnedCourses({ courses }) {
   const { account } = useAccount();
-  const { ownedCourses } = useOwnedCoursesHook(courses, account);
+  const { ownedCourses } = useOwnedCourses(courses, account);
   return (
     <>
       <MarketHeader />
