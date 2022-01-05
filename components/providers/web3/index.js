@@ -1,4 +1,5 @@
 import detectEthereumProvider from "@metamask/detect-provider";
+import { loadContract } from "@utils/loadContract";
 import { setupHooks } from "./hooks/setupHooks";
 const {
   createContext,
@@ -27,6 +28,7 @@ export default function Web3Provider({ children }) {
       const provider = await detectEthereumProvider();
       if (provider) {
         const web3 = new Web3(provider);
+        const contract = loadContract("CourseMarketplace", provider);
         setWeb3Api({
           web3,
           provider,
