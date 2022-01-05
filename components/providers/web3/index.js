@@ -13,15 +13,24 @@ const Web3 = require("web3");
 // Initialize a context variable
 const Web3Context = createContext(null);
 
+const createWeb3State = ({ web3, provider, contract, isLoading }) => ({
+  web3,
+  provider,
+  contract,
+  isLoading,
+  hooks: setupHooks({ web3, provider, contract }),
+});
+
 // A context provider. As you can see in the name
 export default function Web3Provider({ children }) {
-  const [web3Api, setWeb3Api] = useState({
-    web3: null,
-    provider: null,
-    contract: null,
-    isLoading: true,
-    hooks: setupHooks(),
-  });
+  const [web3Api, setWeb3Api] = useState(
+    createWeb3State({
+      web3: null,
+      provider: null,
+      contract: null,
+      isLoading: true,
+    })
+  );
 
   useEffect(() => {
     const getProvider = async () => {
@@ -29,13 +38,9 @@ export default function Web3Provider({ children }) {
       if (provider) {
         const web3 = new Web3(provider);
         const contract = await loadContract("CourseMarketplace", provider);
-        setWeb3Api({
-          web3,
-          provider,
-          contract,
-          isLoading: false,
-          hooks: setupHooks(web3, provider),
-        });
+        setWeb3Api(
+          createWeb3State({ web3, provider, contract, isLoading: false })
+        );
       } else {
         setWeb3Api((api) => ({ ...api, isLoading: false }));
         console.error("Please install Metamask!");
