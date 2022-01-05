@@ -39,4 +39,24 @@ contract CourseMarketplace{
     });
     return courseHash;
   }
+
+  function getCourseCount() external view returns (uint) {
+    return totalOwnedCourses;
+  }
+
+  function getCourseHashAtIndex(uint index)
+    external
+    view
+    returns (bytes32)
+  {
+    return ownedCourseHash[index];
+  }
+
+  function getCourseByHash(bytes32 courseHash)
+    external
+    view
+    returns (Course memory)
+  {
+    return ownedCourses[courseHash];
+  }
 }
