@@ -6,6 +6,7 @@ export default function Button({
   ...rest
 }) {
   const variants = {
+    white: `text-black bg-white`,
     lightPurple: `text-indigo-700 bg-indigo-100 ${
       hoverable && "hover:bg-indigo-200"
     }`,
@@ -15,7 +16,7 @@ export default function Button({
   return (
     <button
       {...rest}
-      className={`disabled:opacity-50 disabled:cursor-not-allowed px-8 py-3 border rounded-md text-base font-medium ${variants[variant]} ${className}`}
+      className={`disabled:opacity-50 disabled:cursor-not-allowed p-2 xs:px-8 xs:py-3 border rounded-md text-base font-medium ${variants[variant]} ${className}`}
     >
       {children}
     </button>
