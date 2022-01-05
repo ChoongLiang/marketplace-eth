@@ -8,11 +8,11 @@ import { MarketHeader } from "@components/ui/marketplace";
 import { useWeb3 } from "@components/providers";
 
 export default function Marketplace({ courses }) {
-  const { web3 } = useWeb3();
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const { web3, contract } = useWeb3();
   const { canPurchase, account } = useWalletInfo();
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const purchaseCourse = (order) => {
+  const handlePurchaseCourse = async (order) => {
     // First course id: 1410474 => 31 34 31 30 34 37 34
     // 0x31343130343734
     const hexCourseId = web3.utils.utf8ToHex(selectedCourse.id);
@@ -34,12 +34,23 @@ export default function Marketplace({ courses }) {
     // 241b6c21ddaaaff355b023143fe4e1f9cd2d6130bc8e4754855a6b0d198839d7 - order
     // af257bcc3cf653863a77012256c927f26d8ab55c5bea3751063d049d0538b902241b6c21ddaaaff355b023143fe4e1f9cd2d6130bc8e4754855a6b0d198839d7
     // get 0xecdb4f91629c2274ee5d518f353c917acac9badad626d94034ab46e3f4a24596
-    const proofHash = web3.utils.soliditySha3(
+    const proof = web3.utils.soliditySha3(
       { type: "bytes32", value: emailHash },
       { type: "bytes32", value: orderHash }
     );
 
-    console.log(proofHash);
+    const price = web3.utils.toWei(String(order.price), "ether");
+
+    try {
+      const result = await contract.methods.purchaseCourse(hexCourseId, proof, {
+        from: account.data,
+        value: price,
+      });
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+      console.error("Purchase course failed");
+    }
   };
 
   return (
@@ -69,7 +80,7 @@ export default function Marketplace({ courses }) {
         <OrderModal
           course={selectedCourse}
           onClose={() => setSelectedCourse(null)}
-          onSubmit={purchaseCourse}
+          onSubmit={handlePurchaseCourse}
         />
       )}
     </>

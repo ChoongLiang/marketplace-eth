@@ -68,7 +68,7 @@ export default function OrderModal({ course, onClose, onSubmit }) {
                 {course.title}
               </h3>
               {formState.message && (
-                <div className="text-yellow-700 bg-yellow-100 rounded-lg p-3 my-3 text-sm">
+                <div className="text-yellow-700 bg-yellow-100 rounded-lg p-3 text-sm">
                   {formState.message}
                 </div>
               )}
