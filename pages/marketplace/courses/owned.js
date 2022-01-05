@@ -1,21 +1,26 @@
 import { MarketHeader } from "@components/ui/marketplace";
 import { OwnedCourseCard } from "@components/ui/course";
-import { Button, Message } from "@components/ui/common";
+import { Button, Loader, Message } from "@components/ui/common";
 import { getAllCourses } from "content/courses/fetcher";
 import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 
 export default function OwnedCourses({ courses }) {
   const { account } = useAccount();
   const { ownedCourses } = useOwnedCourses(courses, account);
-  console.log(ownedCourses.data);
   return (
     <>
       <MarketHeader />
       <section className="grid grid-cols-1">
-        <OwnedCourseCard>
-          <Message>My custom message!</Message>
-          <Button>Watch the course</Button>
-        </OwnedCourseCard>
+        {ownedCourses.data ? (
+          ownedCourses.data.map((course) => (
+            <OwnedCourseCard course={course}>
+              <Message>My custom message!</Message>
+              <Button>Watch the course</Button>
+            </OwnedCourseCard>
+          ))
+        ) : (
+          <Loader />
+        )}
       </section>
     </>
   );
