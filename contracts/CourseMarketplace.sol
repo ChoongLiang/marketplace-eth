@@ -35,6 +35,15 @@ contract CourseMarketplace{
   /// Course has already a Owner!
   error CourseHasOwner();
 
+ /// Only owner has an access!
+  error OnlyOwner();
+
+  modifier onlyOwner() {
+    if (msg.sender != getContractOwner()) {
+      revert OnlyOwner();
+    }
+    _;
+  }
 
   function purchaseCourse(bytes16 courseId, bytes32 proof) external payable returns(bytes32) {
     bytes32 courseHash = keccak256(abi.encodePacked(courseId, msg.sender));
@@ -53,6 +62,14 @@ contract CourseMarketplace{
       state: State.Purchased
     });
     return courseHash;
+  }
+
+
+  function transferOwnership(address newOwner)
+    external
+    onlyOwner
+  {
+    setContractOwner(newOwner);
   }
 
 
@@ -77,6 +94,15 @@ contract CourseMarketplace{
     returns (Course memory) 
   {
     return ownedCourses[courseHash];
+  }
+
+
+  function getContractOwner()
+    public
+    view
+    returns (address)
+  {
+    return owner;
   }
 
 
