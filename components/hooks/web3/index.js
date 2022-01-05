@@ -23,8 +23,9 @@ export const useAccount = () => {
 
 export const useOwnedCourses = (...args) => {
   const response = useHooks((hooks) => hooks.useOwnedCourses)(...args);
+
   return {
-    ownedCourses: { data: response },
+    ownedCourses: response,
   };
 };
 

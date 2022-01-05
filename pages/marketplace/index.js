@@ -21,7 +21,7 @@ export default function Marketplace({ courses }) {
     // 0xE9455ad2a70916544c6a65163eb3fEd38Dbc5A4A - address
     // 31343130343734000000000000000000E9455ad2a70916544c6a65163eb3fEd38Dbc5A4A - combine
     // get 241b6c21ddaaaff355b023143fe4e1f9cd2d6130bc8e4754855a6b0d198839d7
-    const orderHash = web3.utils.soliditySha3(
+    const courseHash = web3.utils.soliditySha3(
       { type: "bytes16", value: hexCourseId },
       { type: "address", value: account.data }
     );
@@ -36,16 +36,20 @@ export default function Marketplace({ courses }) {
     // get 0xecdb4f91629c2274ee5d518f353c917acac9badad626d94034ab46e3f4a24596
     const proof = web3.utils.soliditySha3(
       { type: "bytes32", value: emailHash },
-      { type: "bytes32", value: orderHash }
+      { type: "bytes32", value: courseHash }
     );
 
     const price = web3.utils.toWei(String(order.price), "ether");
 
     try {
-      const result = await contract.methods.purchaseCourse(hexCourseId, proof, {
-        from: account.data,
-        value: price,
-      });
+      const result = await contract.methods
+        .purchaseCourse(hexCourseId, proof)
+        .send({
+          from: account.data,
+          value: price,
+        });
+      console.log(result);
+      console.log("purchased success");
     } catch (error) {
       console.error(error);
       console.error("Purchase course failed");

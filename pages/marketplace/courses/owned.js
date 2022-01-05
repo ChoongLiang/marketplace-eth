@@ -7,10 +7,10 @@ import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 export default function OwnedCourses({ courses }) {
   const { account } = useAccount();
   const { ownedCourses } = useOwnedCourses(courses, account);
+  console.log(ownedCourses.data);
   return (
     <>
       <MarketHeader />
-      {JSON.stringify(ownedCourses.data)}
       <section className="grid grid-cols-1">
         <OwnedCourseCard>
           <Message>My custom message!</Message>
