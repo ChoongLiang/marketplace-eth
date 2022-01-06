@@ -5,11 +5,13 @@ import { getAllCourses } from "content/courses/fetcher";
 import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useWeb3 } from "@components/providers";
 
 export default function OwnedCourses({ courses }) {
   const { account } = useAccount();
-  const { ownedCourses } = useOwnedCourses(courses, account);
+  const { ownedCourses } = useOwnedCourses(courses, account.data);
   const router = useRouter();
+  const { requireInstall } = useWeb3();
   return (
     <>
       <MarketHeader />
@@ -22,24 +24,35 @@ export default function OwnedCourses({ courses }) {
             </Link>
           </Message>
         )}
-        {ownedCourses.data ? (
-          ownedCourses.data.map((course) => (
-            <OwnedCourseCard course={course} key={course.id}>
-              <Message>My custom message!</Message>
-              <Button
-                onClick={() => {
-                  router.push(`/courses/${course.slug}`);
-                }}
-              >
-                Watch the course
-              </Button>
-            </OwnedCourseCard>
-          ))
-        ) : (
-          <div className="m-auto mt-20">
-            <Loader />
+        {account.isEmpty && (
+          <div>
+            <Message type="warning">
+              Wallet not detected. Please connect to wallet.
+            </Message>
           </div>
         )}
+        {requireInstall && (
+          <div>
+            <Message type="warning">
+              Please install{` `}
+              <Link href="https://metamask.io/" target="_blank">
+                <a className="subtitle underline">Metamask.</a>
+              </Link>
+            </Message>
+          </div>
+        )}
+        {ownedCourses.data?.map((course) => (
+          <OwnedCourseCard course={course} key={course.id}>
+            <Message>My custom message!</Message>
+            <Button
+              onClick={() => {
+                router.push(`/courses/${course.slug}`);
+              }}
+            >
+              Watch the course
+            </Button>
+          </OwnedCourseCard>
+        ))}
       </section>
     </>
   );

@@ -15,7 +15,7 @@ export const handler = (web3, contract) => (courses, account) => {
         const hexCourseId = web3.utils.utf8ToHex(course.id);
         const courseHash = web3.utils.soliditySha3(
           { type: "bytes16", value: hexCourseId },
-          { type: "address", value: account.data }
+          { type: "address", value: account }
         );
         const ownedCourse = await contract.methods
           .getCourseByHash(courseHash)
