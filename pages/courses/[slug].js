@@ -1,11 +1,12 @@
 import { useAccount, useOwnedCourse } from "@components/hooks/web3";
-import { Modal } from "@components/ui/common";
+import { Modal, Message } from "@components/ui/common";
 import { Curriculum, Hero, Keypoints } from "@components/ui/course";
 import { getAllCourses } from "@content/courses/fetcher";
 
 export default function Course({ course }) {
   const { account } = useAccount();
   const { ownedCourse } = useOwnedCourse(course, account);
+  const courseState = ownedCourse.data?.state;
   return (
     <>
       <div className="py-4">
@@ -17,6 +18,39 @@ export default function Course({ course }) {
         />
       </div>
       <Keypoints points={course.wsl} />
+      {courseState && (
+        <div className="max-w-5xl mx-auto">
+          {courseState === "purchased" && (
+            <div>
+              <Message type="warning">
+                Course has been purchased successfully. Activation may take up
+                to 24 hours.
+                <i className="block font-normal">
+                  Please contact us at tcltannn@gmail.com
+                </i>
+              </Message>
+            </div>
+          )}
+          {courseState === "activated" && (
+            <div>
+              <Message type="success">
+                Course is activated. Happy learning!
+              </Message>
+            </div>
+          )}
+          {courseState === "deactivated" && (
+            <div>
+              <Message type="danger">
+                Course has been deactivated. Watching functionality has been
+                temporarily disabled.
+                <i className="block font-normal">
+                  Please contact us at tcltannn@gmail.com
+                </i>
+              </Message>
+            </div>
+          )}
+        </div>
+      )}
       <Curriculum locked={true} />
       <Modal />
     </>
