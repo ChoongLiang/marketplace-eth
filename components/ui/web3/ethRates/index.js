@@ -30,7 +30,7 @@ export default function EthRates() {
         <div className="flex items-center justify-center">
           {eth.perItem ? (
             <>
-              <span className="text-2xl font-bold">{eth.perItem} </span>
+              <span className="text-xl font-bold">{eth.perItem} </span>
               <Image
                 layout="fixed"
                 height="35"
