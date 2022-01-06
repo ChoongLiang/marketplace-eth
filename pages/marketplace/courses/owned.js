@@ -14,15 +14,14 @@ export default function OwnedCourses({ courses }) {
     <>
       <MarketHeader />
       <section className="grid grid-cols-1">
-        {(ownedCourses.networkDataInitialized && !ownedCourses.data) ||
-          (ownedCourses.data?.length === 0 && (
-            <Message>
-              You don't have any courses.{` `}
-              <Link href="/marketplace">
-                <a className="subtitle underline">Purchase here.</a>
-              </Link>
-            </Message>
-          ))}
+        {ownedCourses.isEmpty && (
+          <Message type="warning">
+            You don't have any courses.{` `}
+            <Link href="/marketplace">
+              <a className="subtitle underline">Purchase here.</a>
+            </Link>
+          </Message>
+        )}
         {ownedCourses.data ? (
           ownedCourses.data.map((course) => (
             <OwnedCourseCard course={course} key={course.id}>
