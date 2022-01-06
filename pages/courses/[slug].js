@@ -6,7 +6,6 @@ import { getAllCourses } from "@content/courses/fetcher";
 export default function Course({ course }) {
   const { account } = useAccount();
   const { ownedCourse } = useOwnedCourse(course, account);
-  console.log(ownedCourse.data);
   return (
     <>
       <div className="py-4">
@@ -14,6 +13,7 @@ export default function Course({ course }) {
           title={course.title}
           description={course.description}
           coverImage={course.coverImage}
+          isOwner={!!ownedCourse.data}
         />
       </div>
       <Keypoints points={course.wsl} />

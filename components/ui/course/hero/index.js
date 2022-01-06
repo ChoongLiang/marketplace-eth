@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Hero({ title, description, coverImage }) {
+export default function Hero({ title, description, coverImage, isOwner }) {
   return (
     <section>
       <div className="relative bg-white overflow-hidden">
@@ -18,6 +18,11 @@ export default function Hero({ title, description, coverImage }) {
             <div className="relative pt-6 px-4 sm:px-6 lg:px-8"></div>
             <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
+                {isOwner && (
+                  <div className="text-xl p-4 inline-block text-indigo-700 bg-indigo-300 rounded-full font-bold">
+                    You own this
+                  </div>
+                )}
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                   <span className="block xl:inline">
                     {title.substring(0, title.length / 2)}
