@@ -52,7 +52,7 @@ export default function Course({ course }) {
           )}
         </div>
       )}
-      <Curriculum locked={false} courseState={"activated"} />
+      <Curriculum locked={true} courseState={"deactivated"} />
       <Modal />
     </>
   );

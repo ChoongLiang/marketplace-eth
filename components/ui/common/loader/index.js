@@ -1,16 +1,16 @@
 const SIZES = {
-  sm: "w-6 h-6",
-  md: "w-8 h-8",
-  lg: "w-12 h-12",
+  sm: "w-2 h-2",
+  md: "w-4 h-4",
+  lg: "w-6 h-6",
 };
 
 export default function Loader({ size = "md" }) {
   return (
-    <div className={`sk-chase ${SIZES[size]} `}>
-      {Array.from({ length: 12 }).map((_, i) => (
+    <div className={`spinner `}>
+      {Array.from({ length: 3 }).map((_, i) => (
         <div
-          key={`dot-${i}`}
-          className={`sk-chase-dot${i + 1} sk-chase-dot`}
+          key={`bounce-${i}`}
+          className={`bounce${i + 1} ${SIZES[size]} bg-indigo-800`}
         ></div>
       ))}
     </div>
