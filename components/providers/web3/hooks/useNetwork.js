@@ -24,11 +24,15 @@ export const handler = (web3, provider) => () => {
   );
 
   useEffect(() => {
-    provider &&
-      provider.on("chainChanged", (chainId) =>
-        mutate(NETWORKS[parseInt(chainId, 16)] ?? null)
-      );
-  }, [web3]);
+    const mutator = (chainId) =>
+      mutate(NETWORKS[parseInt(chainId, 16)] ?? null);
+    provider?.on("chainChanged", mutator);
+
+    console.log(provider);
+    return () => {
+      provider?.removeListener("chainChanged", mutator);
+    };
+  }, [provider]);
 
   return {
     data,
