@@ -14,9 +14,7 @@ export const handler = (web3, provider) => () => {
       const account = accounts[0];
 
       if (!account) {
-        throw new Error(
-          "Cannot retreive an account. Please refresh the browser."
-        );
+        throw new Error("Cannot retreive an account. Please refresh the browser.");
       }
       return account; // = data : accounts
     }
@@ -25,8 +23,6 @@ export const handler = (web3, provider) => () => {
   useEffect(() => {
     const mutator = (accounts) => mutate(accounts[0] ?? null);
     provider?.on("accountsChanged", mutator);
-
-    console.log(provider);
     return () => {
       provider?.removeListener("accountsChanged", mutator);
     };

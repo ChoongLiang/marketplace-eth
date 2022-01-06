@@ -33,9 +33,7 @@ export default function OwnedCourseCard({ children, course }) {
                 {course.state}
               </span>
             </h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">
-              {course.price} ETH
-            </p>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">{course.price} ETH</p>
           </div>
 
           <div className="border-t border-gray-200">
@@ -43,7 +41,7 @@ export default function OwnedCourseCard({ children, course }) {
               <div className="bg-gray-50 px-4 py-5 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Order ID</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {Number(course.OwnedCourseId) + 1}
+                  {Number(course.ownedCourseId) + 1}
                 </dd>
               </div>
               <div className="bg-white px-4 py-5 sm:px-6">

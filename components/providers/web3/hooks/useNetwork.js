@@ -24,11 +24,8 @@ export const handler = (web3, provider) => () => {
   );
 
   useEffect(() => {
-    const mutator = (chainId) =>
-      mutate(NETWORKS[parseInt(chainId, 16)] ?? null);
+    const mutator = (chainId) => mutate(NETWORKS[parseInt(chainId, 16)] ?? null);
     provider?.on("chainChanged", mutator);
-
-    console.log(provider);
     return () => {
       provider?.removeListener("chainChanged", mutator);
     };

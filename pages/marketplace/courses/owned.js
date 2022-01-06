@@ -1,6 +1,6 @@
 import { MarketHeader } from "@components/ui/marketplace";
 import { OwnedCourseCard } from "@components/ui/course";
-import { Button, Loader, Message } from "@components/ui/common";
+import { Button, Message } from "@components/ui/common";
 import { getAllCourses } from "content/courses/fetcher";
 import { useAccount, useOwnedCourses } from "@components/hooks/web3";
 import { useRouter } from "next/router";
