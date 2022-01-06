@@ -1,4 +1,4 @@
-import Course from "@pages/course";
+import { Loader } from "@components/ui/common";
 import Link from "next/link";
 
 const lectures = [
@@ -10,7 +10,7 @@ const lectures = [
   "Safe operator",
 ];
 
-export default function Curriculum({ locked, courseState }) {
+export default function Curriculum({ locked, courseState, isLoading }) {
   const lockedStatusColor = locked
     ? "bg-red-100 text-red-800"
     : "bg-green-100 text-green-800";
@@ -61,7 +61,9 @@ export default function Curriculum({ locked, courseState }) {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        {locked ? (
+                        {isLoading ? (
+                          <Loader size="sm" />
+                        ) : locked ? (
                           <>
                             {courseState === "purchased" && (
                               <Link href="/faq">
