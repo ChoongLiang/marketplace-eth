@@ -7,8 +7,8 @@ export default function Card({ course, Footer = null, disabled }) {
       key={course.id}
       className="bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
     >
-      <div className="flex h-full flex-col sm:flex-row">
-        <div className="flex-1 h-full next-image-wrapper">
+      <div className="block sm:flex h-full">
+        <div className="flex-1 h-72 sm:h-full next-image-wrapper">
           <Image
             className={`object-cover ${disabled && "filter grayscale"}`}
             src={course.coverImage}
