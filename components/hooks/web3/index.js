@@ -29,6 +29,14 @@ export const useOwnedCourses = (...args) => {
   };
 };
 
+export const useOwnedCourse = (...args) => {
+  const response = useHooks((hooks) => hooks.useOwnedCourse)(...args);
+
+  return {
+    ownedCourse: response,
+  };
+};
+
 export const useWalletInfo = () => {
   const { account } = useAccount();
   const { network } = useNetwork();

@@ -1,8 +1,12 @@
+import { useAccount, useOwnedCourse } from "@components/hooks/web3";
 import { Modal } from "@components/ui/common";
 import { Curriculum, Hero, Keypoints } from "@components/ui/course";
 import { getAllCourses } from "@content/courses/fetcher";
 
 export default function Course({ course }) {
+  const { account } = useAccount();
+  const { ownedCourse } = useOwnedCourse(course, account);
+  console.log(ownedCourse.data);
   return (
     <>
       <div className="py-4">
